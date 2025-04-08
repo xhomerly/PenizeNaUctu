@@ -11,13 +11,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class HelloController {
     @FXML private TextField inputMoneyField, yearPercentField, numOfYearsField;
     @FXML private TextArea textArea;
     int year;
     double percent, money;
+
+    public void initialize() {
+        textArea.setFont(Font.font("monospace"));
+    }
 
     public void calc() {
         year = Integer.parseInt(numOfYearsField.getText());
@@ -53,13 +60,12 @@ public class HelloController {
     public void createTable() {
         calc();
         StringBuilder resultText = new StringBuilder();
-        //TODO: udelat string format na to aby bylo (rok, deset mezer) a pak (deset mezer, castka)
-        resultText.append("Rok\tČástka\n");
+        resultText.append(String.format("%-10s%10s%n", "Rok", "Částka"));
+        resultText.append(String.format("%-10s%,10.2f%n", "0", money));
 
-        for (int i = 0; i <= year; i++) {
-            resultText.append(i+"\t");
+        for (int i = 1; i <= year; i++) {
             money += money*percent;
-            resultText.append(String.format("%.2f", money)+"\n");
+            resultText.append(String.format("%-10s%,10.2f%n", i, money));
         }
 
         textArea.setText(resultText.toString());
