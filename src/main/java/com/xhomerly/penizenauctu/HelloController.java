@@ -53,6 +53,7 @@ public class HelloController {
     public void createTable() {
         calc();
         StringBuilder resultText = new StringBuilder();
+        //TODO: udelat string format na to aby bylo (rok, deset mezer) a pak (deset mezer, castka)
         resultText.append("Rok\tČástka\n");
 
         for (int i = 0; i <= year; i++) {
